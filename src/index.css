@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+
+
+body {
+  padding-left: 24vw;
+  padding-right: 24vw;
+  padding-top: 50px;
+}
