@@ -1,72 +1,65 @@
-export const Heading = ({ title }) => {
+import { useState } from "react";
+import { tech } from "../data/tech";
+
+export const Heading = ({ title, subtitle }) => {
   return (
-    <div>
-      <h1 className="text-2xl font-medium pb-5">{title}</h1>
+    <div className="pb-6">
+      <h2 className="text-2xl font-medium tracking-tight sm:text-3xl">{title}</h2>
+      {subtitle && <p className="mt-1 text-sm text-zinc-500">{subtitle}</p>}
     </div>
   );
 };
 
 export const Divider = () => {
-  return (
-    <div className="text-gray-200 w-full h-[1px] bg-gray-300 mt-14 mb-14"></div>
-  );
+  return <div className="my-14 h-px w-full bg-zinc-200 sm:my-16" />;
 };
 
-export const TechHeading = ({ title }) => {
+export const Card = ({ className = "", children }) => {
   return (
-    <div>
-      <h1 className="text-lg font-medium pb-4">{title}</h1>
+    <div className={`rounded-2xl border border-zinc-200 bg-white ${className}`}>
+      {children}
     </div>
   );
 };
 
-export const TechCard = ({ icon, title, title2 }) => {
+export const IconBadge = ({ icon: Icon }) => {
   return (
-    <div className="flex flex-col items-center gap-2">
-      <div className="w-14 h-14 border-2 border-gray-200 rounded-xl flex items-center justify-center">
-        <img src={icon} alt={title} className="w-9 h-9 object-contain" />
-      </div>
-      <div>
-        <p className="text-sm text-gray-700">{title}</p>
-        <p className="text-sm text-gray-700">{title2}</p>
-      </div>
+    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-zinc-200">
+      <Icon className="h-5 w-5" />
     </div>
   );
 };
 
-export const ExpHead = ({ icon: Icon, title, count }) => {
+// Logo for a technology from the shared map. Renders nothing if there's
+// no logo or the image fails to load.
+export const TechLogo = ({ name, className = "h-4 w-4" }) => {
+  const [failed, setFailed] = useState(false);
+  const { icon, Icon } = tech[name] || {};
+
+  if (Icon) return <Icon className={`${className} shrink-0 text-zinc-800`} />;
+  if (!icon || failed) return null;
+
   return (
-    <div className="flex-1 flex flex-row">
-      <div className="border-1 border-gray-300 p-2 rounded-lg">
-        <Icon />
-      </div>
-      <div className="flex flex-col pl-2 justify-start">
-        <p className="text-md font-bold">{count}</p>
-        <p className="text-xs text-gray-500">{title}</p>
-      </div>
-    </div>
+    <img
+      src={icon}
+      alt=""
+      loading="lazy"
+      onError={() => setFailed(true)}
+      className={`${className} shrink-0 object-contain`}
+    />
   );
 };
 
-export const ContactCard = ({ icon: Icon, title, link, mail }) => {
+export const TechPill = ({ name, small = false }) => {
   return (
-    <div className="border-2 border-gray-200 rounded-xl p-2 ">
-      <div className="flex flex-row items-center gap-2">
-        <div className="border-1 border-gray-300 p-2 rounded-lg">
-          <Icon />
-        </div>
-        <div className="flex flex-col pl-2 justify-start">
-          <p className="text-md font-bold">{title}</p>
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-gray-500"
-          >
-            {mail}
-          </a>
-        </div>
-      </div>
-    </div>
+    <span
+      className={`inline-flex items-center rounded-full border border-zinc-200 bg-white text-zinc-700 transition-colors duration-200 hover:border-zinc-900 hover:text-zinc-950 ${
+        small ? "gap-1.5 px-2.5 py-1 text-xs" : "gap-2 px-3 py-1.5 text-sm"
+      }`}
+    >
+      <TechLogo name={name} className={small ? "h-3.5 w-3.5" : "h-4 w-4"} />
+      {name}
+    </span>
   );
 };
+

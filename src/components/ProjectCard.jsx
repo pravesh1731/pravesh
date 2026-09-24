@@ -1,126 +1,158 @@
-import React from "react";
-import { GitBranch, Play, Globe } from "lucide-react";
+import { Check } from "lucide-react";
+import { IconBadge, TechPill } from "../Common/Common";
+import ResourceLinks from "./ResourceLinks";
 
-const ProjectCard = ({
+const ProjectLinks = ({ links = [] }) => {
+  if (links.length === 0) return null;
+
+  return (
+    <div className="mt-auto pt-6">
+      <div className="border-t border-zinc-100 pt-4">
+        <ResourceLinks links={links} />
+      </div>
+    </div>
+  );
+};
+
+const Tag = ({ children, dark = false }) => (
+  <span
+    className={`rounded-full px-2.5 py-1 text-xs font-medium ${
+      dark ? "bg-zinc-900 text-white" : "border border-zinc-200 text-zinc-600"
+    }`}
+  >
+    {children}
+  </span>
+);
+
+const Screenshot = ({ image, title }) =>
+  image ? (
+    <img
+      src={image}
+      alt={`${title} screenshot`}
+      loading="lazy"
+      className="mb-6 aspect-video w-full rounded-xl border border-zinc-200 object-cover"
+    />
+  ) : null;
+
+export const FeaturedProject = ({
+  number,
   image,
   title,
   subtitle,
+  tag,
   description,
-  techStack,
+  deliverables,
   features,
-  githubLink,
-  appLink,
-  websiteLink,
+  techStack,
+  links,
 }) => {
-    
   return (
-    <div className="border border-gray-300 p-2 rounded-xl">
+    <article className="grid overflow-hidden rounded-3xl border border-zinc-200 transition-colors duration-300 hover:border-zinc-400 md:grid-cols-[1.1fr_1fr]">
+      <div className="flex flex-col p-6 sm:p-8">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="mr-1 font-mono text-xs text-zinc-400">{number}</span>
+          <Tag dark>Featured</Tag>
+          {tag && <Tag>{tag}</Tag>}
+        </div>
 
-      {/* Image */}
-      <div>
-        <img
-          src={image}
-          alt={title}
-          className="w-full max-h-64 object-cover rounded-2xl"
-        />
-      </div>
+        <h3 className="mt-5 text-2xl font-semibold tracking-tight sm:text-3xl">
+          {title}
+        </h3>
+        <p className="mt-1 text-zinc-500">{subtitle}</p>
+        <p className="mt-4 text-[15px] leading-7 text-zinc-600">{description}</p>
 
-      {/* Description */}
-      <div className="p-1">
-        <p className="text-xl font-semibold">{title}</p>
-
-        <p className="text-[14px] text-gray-700 pb-1 font-semibold">
-          {subtitle}
-        </p>
-
-        <p className="text-[13px] text-gray-500">
-          {description}
-        </p>
-
-        {/* Tech Stack */}
-        <div className="flex flex-wrap gap-2 pt-3">
-          {techStack.map((tech) => (
-            <div
-              key={tech.name}
-              className="flex items-center border border-gray-400 px-2 py-1 rounded-md"
-            >
-              {tech.icon && (
-                <img
-                  src={tech.icon}
-                  alt={tech.name}
-                  className="w-3 h-3 mr-1"
-                />
-              )}
-
-              <span className="text-xs">
-                {tech.name}
-              </span>
-            </div>
+        <div className="mt-6 flex flex-wrap gap-2">
+          {techStack.map((name) => (
+            <TechPill key={name} name={name} small />
           ))}
         </div>
 
-        {/* Features */}
-        <div className="flex gap-1 mt-3">
-          <ul className="text-xs list-disc flex-1 ml-2 text-gray-700">
-            {features?.slice(0, Math.ceil(features.length / 2)).map(
-              (feature, index) => (
-                <li key={index} className="m-1">
-                  {feature}
-                </li>
-              )
-            )}
-          </ul>
-
-          <ul className="text-xs list-disc flex-1 px-2 py-1 text-gray-700">
-            {features?.slice(Math.ceil(features.length / 2)).map(
-              (feature, index) => (
-                <li key={index} className="m-1">
-                  {feature}
-                </li>
-              )
-            )}
-          </ul>
-        </div>
+        <ProjectLinks links={links} />
       </div>
 
-      {/* Divider */}
-      <div className="border-t border-gray-300" />
+      <div className="border-t border-zinc-200 bg-zinc-50 p-6 sm:p-8 md:border-t-0 md:border-l">
+        <Screenshot image={image} title={title} />
 
-      {/* Links */}
-      <div className="w-full flex justify-between pt-2 pb-1">
+        <p className="text-xs font-medium tracking-widest text-zinc-500 uppercase">
+          What I shipped
+        </p>
+        <ul className="mt-4 grid gap-2.5">
+          {deliverables.map(({ icon, label, detail }) => (
+            <li
+              key={label}
+              className="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white p-3"
+            >
+              <IconBadge icon={icon} />
+              <div>
+                <p className="text-sm font-medium">{label}</p>
+                <p className="text-xs text-zinc-500">{detail}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
 
-        <a
-          href={githubLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 hover:underline"
-        >
-          <GitBranch className="w-4 h-4" />
-          <span className="text-[12px]">GitHub</span>
-        </a>
-
-        <a
-          href={appLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1 hover:underline"
-        >
-          <Play className="w-4 h-4" />
-          <span className="text-[12px]">App</span>
-        </a>
-
-        <a
-          href={websiteLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 hover:underline"
-        >
-          <Globe className="w-4 h-4" />
-          <span className="text-[12px]">Website</span>
-        </a>
-
+        <p className="mt-7 text-xs font-medium tracking-widest text-zinc-500 uppercase">
+          Features
+        </p>
+        <ul className="mt-3 grid gap-x-4 sm:grid-cols-2 gap-y-2 text-sm text-zinc-700">
+          {features.map((feature) => (
+            <li key={feature} className="flex items-start gap-2">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-zinc-900" />
+              {feature}
+            </li>
+          ))}
+        </ul>
       </div>
-    </div>
+    </article>
+  );
+};
+
+const ProjectCard = ({
+  number,
+  image,
+  title,
+  subtitle,
+  tag,
+  description,
+  features,
+  techStack,
+  links,
+  className = "",
+}) => {
+  return (
+    <article
+      className={`flex h-full flex-col rounded-3xl border border-zinc-200 bg-white p-6 transition duration-300 hover:border-zinc-400 hover:shadow-[0_16px_40px_-20px_rgba(0,0,0,0.25)] ${className}`}
+    >
+      <Screenshot image={image} title={title} />
+
+      <div className="flex items-center justify-between gap-3">
+        <span className="font-mono text-xs text-zinc-400">{number}</span>
+        {tag && <Tag>{tag}</Tag>}
+      </div>
+
+      <h3 className="mt-4 text-xl font-semibold tracking-tight">{title}</h3>
+      <p className="text-sm text-zinc-500">{subtitle}</p>
+      <p className="mt-3 text-sm leading-6 text-zinc-600">{description}</p>
+
+      {features?.length > 0 && (
+        <ul className="mt-4 space-y-1.5 text-sm text-zinc-700">
+          {features.map((feature) => (
+            <li key={feature} className="flex items-start gap-2">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-zinc-900" />
+              {feature}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <div className="mt-5 flex flex-wrap gap-1.5">
+        {techStack.map((name) => (
+          <TechPill key={name} name={name} small />
+        ))}
+      </div>
+
+      <ProjectLinks links={links} />
+    </article>
   );
 };
 

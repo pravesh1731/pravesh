@@ -1,24 +1,11 @@
-import React from 'react'
-
 const ExperienceItem = ({ title, company, startDate, endDate }) => {
   return (
     <div>
-      <h3 className="text-[14px] font-semibold">
-        {title}
-      </h3>
-
-      <p className="text-[14px] text-gray-500">
-        {company}
-      </p>
-
-      <p className="text-[14px] text-gray-500">
+      <h4 className="text-sm font-semibold">{title}</h4>
+      <p className="text-sm text-zinc-600">{company}</p>
+      <p className="mt-0.5 text-xs text-zinc-400">
         {startDate}
-        {endDate && (
-          <>
-            <span className="mx-3">—</span>
-            {endDate}
-          </>
-        )}
+        {endDate && ` — ${endDate}`}
       </p>
     </div>
   );

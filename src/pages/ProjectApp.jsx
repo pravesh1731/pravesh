@@ -1,206 +1,127 @@
-import React from "react";
+import { ArrowUpRight, Globe, ShieldCheck, Smartphone, Store } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import { Heading } from "../Common/Common";
-import image from "../assets/project.png";
-import {  GitBranch, Globe, Play } from "lucide-react";
-import ProjectCard from "../components/ProjectCard";
+import ProjectCard, { FeaturedProject } from "../components/ProjectCard";
+import { GITHUB_URL } from "../data/links";
+
+// Links come from the resume; `kind` picks the icon (see ResourceLinks).
+// `image` is optional: import a screenshot from ../assets to show one.
+const featured = {
+  title: "Thaiseva",
+  subtitle: "Tourism & Travel Platform",
+  tag: "Client project",
+  description:
+    "A complete travel platform for a Thailand-based client. Travellers can book sightseeing packages, hotels, taxis, and food in one place, while partners and admins manage everything from their own panels.",
+  deliverables: [
+    { icon: Smartphone, label: "Flutter mobile app", detail: "Bookings, orders, and chat" },
+    { icon: Globe, label: "Customer website", detail: "The same services on the web" },
+    { icon: Store, label: "Restaurant partner panel", detail: "Menus and food orders" },
+    { icon: ShieldCheck, label: "2 super-admin panels", detail: "Running the whole platform" },
+  ],
+  features: [
+    "Sightseeing packages",
+    "Taxi & vehicle rentals",
+    "Hotel booking",
+    "Food ordering",
+    "Real-time chat",
+    "Payment integration",
+  ],
+  techStack: ["Flutter", "Dart", "Riverpod", "Firebase", "React"],
+  links: [
+    { kind: "website", label: "thaiseva.com", href: "https://thaiseva.com/" },
+    { kind: "admin", label: "Admin panel", href: "https://gothai-admin.web.app/login" },
+  ],
+};
+
+const projects = [
+  {
+    title: "Present-Me",
+    subtitle: "Attendance Management System",
+    description:
+      "Attendance for colleges without the paper register: automated marking, real-time tracking, and separate access for students and teachers.",
+    features: [
+      "Hotspot, video or manual attendance",
+      "HOD admin panel",
+      "PDF & Excel reports",
+      "Notice board & timetable",
+      "Previous year papers",
+    ],
+    techStack: ["Flutter", "BLoC", "Node.js", "Express", "AWS EC2", "DynamoDB", "React"],
+    links: [
+      { kind: "website", label: "presentme.in", href: "https://presentme.in/" },
+      { kind: "github", label: "Code", href: "https://github.com/pravesh1731/Present-me" },
+    ],
+  },
+  {
+    title: "Jasaen",
+    subtitle: "Hotel Booking Platform",
+    tag: "Client project",
+    description:
+      "A full-stack hotel booking site for a Thailand-based client, with an admin portal and Cloudbeds integration.",
+    features: [
+      "Room booking & management",
+      "Admin portal",
+      "Cloudbeds integration",
+      "Google sign-in",
+    ],
+    techStack: ["Next.js", "TypeScript", "MongoDB", "Vercel"],
+    links: [],
+  },
+  {
+    title: "AgriDirect",
+    subtitle: "Farmer-to-Consumer Marketplace",
+    description:
+      "Connects farmers directly with buyers, cutting out middlemen so both sides get a fair price. Payments run through smart contracts, so every transaction is transparent and tamper-proof.",
+    features: [
+      "Direct farmer-to-buyer orders",
+      "Inventory management",
+      "Real-time chat over sockets",
+      "Blockchain smart contracts",
+    ],
+    techStack: ["Flutter", "GetX", "Firebase", "Cloudinary"],
+    links: [
+      { kind: "github", label: "Code", href: "https://github.com/pravesh1731/agriDirect" },
+      {
+        kind: "apk",
+        label: "Download APK",
+        href: "https://drive.google.com/file/d/1yJUaqovasxyL30G8hz-2IUv6HhmnKqPV/view?usp=sharing",
+      },
+    ],
+  },
+];
 
 const ProjectApp = () => {
-  const techStackPresentMe = [
-    {
-      name: "Flutter",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
-    },
-    {
-      name: "Dart",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg",
-    },
-    {
-      name: "Bloc",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bloc/bloc-original.svg",
-    },
-    {
-      name: "NodeJS",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-    },
-    {
-      name: "AWS",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg",
-    },
-    {
-      name: "Express",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
-    },
-
-    {
-      name: "EC2",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg",
-    },
-    {
-      name: "DynamoDB",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg",
-    },
-    {
-      name: "React",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    },
-  ];
-  const techStackAgriDirect = [
-    {
-      name: "Flutter",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
-    },
-    {
-      name: "Dart",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg",
-    },
-   
-    {
-      name: "Riverpod",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/riverpod/riverpod-original.svg",
-    },
-    {
-      name: "Firebase",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg",
-    },
-    {
-      name: "WebSocket",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg",
-    },
-    
-  ];
-  const techStackThaiseva = [
-    {
-      name: "Flutter",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
-    },
-    {
-      name: "Dart",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg",
-    },
-   
-    {
-      name: "Riverpod",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/riverpod/riverpod-original.svg",
-    },
-    {
-      name: "Firebase",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg",
-    },
-    {
-      name: "React",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    },
-    
-    
-  ];
-  const techStackJasaen = [
-    {
-      name: "NextJS",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-    },
-    {
-      name: "TypeScript",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-    },
-    {
-      name: "MongoDB",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-    },
-    {
-      name: "Versal",
-      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg",
-    },
-  ];
-   const featuresPresentMe = [
-    "Dual Login(Student/Teacher)",
-    "Attendance(Hotspot/Manual)",
-    "Reports(PDF/EXCEL)",
-    "Notice Board, TimeTable",
-    "PYQ Access",
-  ];
-  const featuresAgriDirect = [
-    "Direct Transaction between Farmers and Consumers",
-    "Inventory Management",
-    "Real-time Chat",
-    "Secure and Transparent",
-  ]
-  const featuresAgriThaiseva = [
-    "Sightseeing Packages",
-    "Taxi & Vehicle Rentals",
-    "Hotel Booking",
-    "Food Ordering",
-    "Real-time Chat",
-    "Payment Integration",
-  ]
-  const featuresJasaen = [
-    "Room Booking",
-    "Room Management",
-    "Admin Portal",
-    "Cloudbed Integration",
-    "Google Authentication",
-  ]
   return (
-    <section>
-      <Heading title="Projects" />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-       
+    <section id="projects">
+      <Heading
+        title="Projects"
+        subtitle="Client platforms and my own builds, from mobile apps to full systems."
+      />
 
-        <ProjectCard
-          image={image}
-          title="Present-Me"
-          subtitle="Attendance Management System"
-          description="A comprehensive attendance management system for education institutions with automation, real-time tracking and role-based access."
-          techStack={techStackPresentMe}
-          features={featuresPresentMe}
-          githubLink="https://github.com/"
-          appLink="https://play.google.com/"
-          websiteLink="https://example.com/"
-        />
+      <FeaturedProject number="01" {...featured} />
 
+      <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project, index) => (
+          <ProjectCard
+            key={project.title}
+            number={String(index + 2).padStart(2, "0")}
+            className={index === projects.length - 1 ? "md:col-span-2 lg:col-span-1" : ""}
+            {...project}
+          />
+        ))}
+      </div>
 
-        <ProjectCard
-          image={image}
-          title="Thaiseva"
-          subtitle="Tourism and Travel Platform"
-          description="A Complete tour and travel platform for a Thailand-based client with booking, ordering, and rental services.It has flutter App, User Website, Admin Panel for Restureants Partners, & 2 Super Admin Panels"
-          techStack={techStackThaiseva}
-          features={featuresAgriThaiseva}
-          githubLink="https://github.com/"
-          appLink="https://play.google.com/"
-          websiteLink="https://example.com/"
-        />
-
-        <ProjectCard
-          image={image}
-          title="AgriDirect"
-          subtitle="Farmer-to-Consumer Marketplace"
-          description="A App that connects farmers directly with consumers, eliminating intermediaries and ensuring fair prices for both parties."
-          techStack={techStackAgriDirect}
-          features={featuresAgriDirect}
-          githubLink="https://github.com/"
-          appLink="https://play.google.com/"
-          websiteLink="https://example.com/"
-        />
-
-        <ProjectCard
-          image={image}
-          title="Jasaen"
-          subtitle="Hotel Booking Platform"
-          description="A Full-Stack hotel booking platform for a Thailand-based client with admin portal along with cloudbed integration."
-          techStack={techStackJasaen}
-          features={featuresJasaen}
-          githubLink="https://github.com/"
-          appLink="https://play.google.com/"
-          websiteLink="https://example.com/"
-        />
-
-
-
-        
-
-
-
-    
+      <div className="mt-8 flex justify-center">
+        <a
+          href={GITHUB_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group inline-flex items-center gap-2 rounded-full border border-zinc-300 px-5 py-2 text-sm font-medium transition-colors duration-200 hover:border-zinc-900"
+        >
+          <FaGithub className="h-4 w-4" />
+          More on GitHub
+          <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        </a>
       </div>
     </section>
   );

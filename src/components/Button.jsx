@@ -1,10 +1,17 @@
-import React from "react";
+const styles = {
+  primary: "bg-zinc-900 text-white border-zinc-900 hover:bg-zinc-700",
+  outline: "border-zinc-300 text-zinc-900 hover:border-zinc-900",
+};
 
-const Button = ({px, py , title}) => {
+const Button = ({ href, variant = "outline", children, ...rest }) => {
   return (
-    <div className={`border ${px} ${py} rounded-2xl border-gray-300 hover:border-gray-700 transition-colors duration-200`}>
-      {title}
-    </div>
+    <a
+      href={href}
+      className={`inline-flex items-center gap-2 rounded-full border px-5 py-2 text-sm font-medium transition-colors duration-200 ${styles[variant]}`}
+      {...rest}
+    >
+      {children}
+    </a>
   );
 };
 

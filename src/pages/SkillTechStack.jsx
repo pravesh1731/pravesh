@@ -1,278 +1,134 @@
-import React from 'react'
-import { Cloud, Database, Globe, Smartphone, Wrench } from "lucide-react";
-import { Heading, TechCard, TechHeading } from '../Common/Common';
+import { Cloud, Database, Globe, Server, Smartphone, Wrench } from "lucide-react";
+import { Heading, IconBadge, TechLogo, TechPill } from "../Common/Common";
+
+// What I use most, shown first.
+const coreStack = [
+  {
+    title: "Flutter & Dart",
+    logos: ["Flutter", "Dart"],
+    note: "Used in every role so far. Apps shipped to the Play Store and App Store.",
+  },
+  {
+    title: "Kotlin & Compose",
+    logos: ["Kotlin", "Jetpack Compose"],
+    note: "Native Android apps, with Jetpack Compose for UI.",
+  },
+  {
+    title: "Firebase",
+    logos: ["Firebase"],
+    note: "Auth, Firestore, and security rules in production apps.",
+  },
+  {
+    title: "Node.js & Express",
+    logos: ["Node.js", "Express"],
+    note: "REST APIs and backends for my mobile apps, deployed on AWS.",
+  },
+];
+
+const groups = [
+  {
+    title: "Mobile",
+    icon: Smartphone,
+    items: ["Flutter", "Dart", "Kotlin", "Swift", "Jetpack Compose", "XML", "Riverpod", "BLoC", "GetX"],
+  },
+  {
+    title: "Frontend",
+    icon: Globe,
+    items: ["HTML", "Tailwind CSS", "React", "Next.js", "Redux"],
+  },
+  {
+    title: "Backend",
+    icon: Server,
+    items: ["Node.js", "Express", "REST APIs", "Firebase"],
+  },
+  {
+    title: "Database",
+    icon: Database,
+    items: ["MongoDB", "MySQL", "PostgreSQL", "Firestore", "DynamoDB"],
+  },
+  {
+    title: "Cloud & DevOps",
+    icon: Cloud,
+    items: ["AWS", "Docker", "Jenkins", "Codemagic", "Ansible"],
+  },
+  {
+    title: "Tools",
+    icon: Wrench,
+    items: [
+      "VS Code",
+      "Android Studio",
+      "Git",
+      "GitHub",
+      "Figma",
+      "Cloudflare",
+      "Firebase Console",
+      "Play Console",
+      "App Store Connect",
+    ],
+  },
+];
 
 const SkillTechStack = () => {
   return (
-    <section>
-        <Heading title="Skill & Tech Stack" />
-        {/* App Icon */}
-        <div className="p-4 border-1 border-gray-200 rounded-3xl mb-4">
-          {/* subheading with icon */}
-          <div className="flex flex-row gap-3 pb-3 items-center">
-            <div className=" p-2 border-2 border-gray-200 rounded-full">
-              <Smartphone className="w-7 h-7" />
-            </div>
-            <div className="pt-4">
-              <TechHeading title="Mobile Development" />
-            </div>
-          </div>
+    <section id="skills">
+      <Heading
+        title="Skills & Tech Stack"
+        subtitle="What I use every day, and the rest of my toolbox."
+      />
 
-          <div className="flex justify-between flex-wrap gap-4">
-            <TechCard
-              icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg"
-              title="Swift"
-            />
-            <TechCard
-              icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg"
-              title="Kotlin"
-            />
-            <TechCard
-              icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jetpackcompose/jetpackcompose-original.svg"
-              title="Jetpack"
-              title2="Compose"
-            />
-            <TechCard
-              icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/xml/xml-plain.svg"
-              title="XML"
-            />
-            <TechCard
-              icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg"
-              title="Flutter"
-            />
-            <TechCard
-              icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dart/dart-original.svg"
-              title="Dart"
-            />
-            <TechCard
-              icon="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1KHravF2hon_vonoQlB-wzkSz1YJLgxvE5HRgp0N1VTt07ABm3pYKqUs&s=10"
-              title="Riverpod"
-            />
-            <TechCard
-              icon="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQedAa9M71svCrLsQoXOJ_H6o1S6bb25D1Kgu6UPw_QDl_Y5LaVuHnBBec&s=10"
-              title="BLOC"
-            />
-            <TechCard
-              icon="https://www.mystore.in/s/62ea2c599d1398fa16dbae0a/g/685d64d52cede9b72b632c07/logo-jpg-getx-1--1024x1024.jpg"
-              title="GetX"
-            />
-          </div>
+      {/* Core stack */}
+      <div className="rounded-3xl bg-zinc-900 p-5 text-white sm:p-8">
+        <p className="text-xs font-medium tracking-widest text-zinc-400 uppercase">
+          Core stack
+        </p>
+        <h3 className="mt-1.5 text-xl font-medium tracking-tight">
+          What I build with most
+        </h3>
+
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {coreStack.map((item) => (
+            <div
+              key={item.title}
+              className="rounded-2xl border border-white/10 bg-white/4 p-4 transition-colors duration-200 hover:border-white/25 hover:bg-white/7 sm:p-5"
+            >
+              <div className="flex -space-x-2">
+                {item.logos.map((logo) => (
+                  <div
+                    key={logo}
+                    className="flex h-11 w-11 items-center justify-center rounded-xl bg-white ring-4 ring-zinc-900"
+                  >
+                    <TechLogo name={logo} className="h-6 w-6" />
+                  </div>
+                ))}
+              </div>
+              <p className="mt-4 font-medium">{item.title}</p>
+              <p className="mt-1 text-sm leading-6 text-zinc-400">{item.note}</p>
+            </div>
+          ))}
         </div>
+      </div>
 
-        <div className="flex flex-row gap-4">
-          {/* Frontend Icons */}
-          <div className="p-4 border-1 border-gray-200 rounded-3xl mb-4 flex-1">
-            {/* subheading with icon */}
-            <div className="flex flex-row gap-3 pb-3 items-center">
-              <div className=" p-2 border-2 border-gray-200 rounded-full">
-                <Globe className="w-7 h-7" />
-              </div>
-              <div className="pt-4">
-                <TechHeading title="Frontend Development" />
-              </div>
+      {/* Full toolbox */}
+      <div className="mt-4 divide-y divide-zinc-200 rounded-3xl border border-zinc-200">
+        {groups.map((group) => (
+          <div
+            key={group.title}
+            className="grid gap-4 p-5 sm:p-6 md:grid-cols-[190px_1fr] md:items-center"
+          >
+            <div className="flex items-center gap-3">
+              <IconBadge icon={group.icon} />
+              <h3 className="font-medium">{group.title}</h3>
             </div>
-
-            <div className="flex flex-wrap gap-4 justify-between">
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"
-                title="HTML"
-              />
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
-                title="Tailwind"
-                title2="CSS"
-              />
-
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"
-                title="ReactJS"
-              />
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg"
-                title="NextJS"
-              />
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redux/redux-original.svg"
-                title="Redux"
-              />
+            <div className="flex flex-wrap gap-2">
+              {group.items.map((name) => (
+                <TechPill key={name} name={name} />
+              ))}
             </div>
           </div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
-          {/* Backend Icons */}
-          <div className="p-4 border-1 border-gray-200 rounded-3xl mb-4 flex-1">
-            {/* subheading with icon */}
-            <div className="flex flex-row gap-3 pb-3 items-center">
-              <div className=" p-2 border-2 border-gray-200 rounded-full">
-                <Globe className="w-7 h-7" />
-              </div>
-              <div className="pt-4">
-                <TechHeading title="Backend Development" />
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-4 justify-between">
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original-wordmark.svg"
-                title="NodeJS"
-              />
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original-wordmark.svg"
-                title="ExpressJS"
-              />
-              <TechCard
-                icon="https://thivalente.com.br/wp-content/uploads/2024/07/restApi.webp"
-                title="REST API"
-              />
-
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg"
-                title="Firebase"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* section 3 */}
-        <div className="flex flex-row gap-4 ">
-          {/* Database Icons */}
-          <div className="p-4 border-1 border-gray-200 rounded-3xl mb-4 flex-1">
-            {/* subheading with icon */}
-            <div className="flex flex-row gap-3 pb-3 items-center">
-              <div className=" p-2 border-2 border-gray-200 rounded-full">
-                <Database className="w-7 h-7" />
-              </div>
-              <div className="pt-4">
-                <TechHeading title="Database" />
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-4 justify-between">
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg"
-                title="Mongo"
-                title2="DB"
-              />
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg"
-                title="MySQL"
-              />
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
-                title="Postgre"
-                title2="SQL"
-              />
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg"
-                title="Firestore"
-              />
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"
-                title="DynamoDB"
-              />
-            </div>
-          </div>
-
-          {/* Cloud and DevOps Icons */}
-          <div className="p-4 border-1 border-gray-200 rounded-3xl mb-4 flex-1">
-            {/* subheading with icon */}
-            <div className="flex flex-row gap-3 pb-3 items-center">
-              <div className=" p-2 border-2 border-gray-200 rounded-full">
-                <Cloud className="w-7 h-7" />
-              </div>
-              <div className="pt-4">
-                <TechHeading title="Cloud & DevOps" />
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-4 justify-between">
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
-                title="AWS"
-              />
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg"
-                title="Docker"
-              />
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg"
-                title="Jenkins"
-              />
-              <TechCard
-                icon="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYKJDu2F4ptD08lC1ZJQvsQe_nIYcNvoXs1ENQ76Gd-w&s"
-                title="Codemagic"
-              />
-              <TechCard
-                icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ansible/ansible-original.svg"
-                title="Ansible"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Tools I user Icon */}
-        <div className="p-4 border-1 border-gray-200 rounded-3xl mb-4">
-          {/* subheading with icon */}
-          <div className="flex flex-row gap-3 pb-3 items-center">
-            <div className=" p-2 border-2 border-gray-200 rounded-full">
-              <Wrench className="w-7 h-7" />
-            </div>
-            <div className="pt-4">
-              <TechHeading title="Tool I Used" />
-            </div>
-          </div>
-
-          <div className="flex flex-wrap gap-4 justify-between">
-            <TechCard
-              icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg"
-              title="VS Code"
-            />
-            <TechCard
-              icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg"
-              title="Git"
-            />
-            <TechCard
-              icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"
-              title="Github"
-            />
-            <TechCard
-              icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg"
-              title="Figma"
-            />
-            <TechCard
-              icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/androidstudio/androidstudio-original.svg"
-              title="Android"
-              title2="Studio"
-            />
-            <TechCard
-              icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg"
-              title="Docker"
-              title2="Desktop"
-            />
-            <TechCard
-              icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cloudflare/cloudflare-original.svg"
-              title="Cloudflare"
-            />
-
-            <TechCard
-              icon="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg"
-              title="Firebase"
-              title2="Console"
-            />
-            <TechCard
-              icon="https://images.seeklogo.com/logo-png/48/2/google-play-console-icon-logo-png_seeklogo-486878.png"
-              title="Google Play"
-              title2="Console"
-            />
-
-            <TechCard
-              icon="https://developer.apple.com/assets/elements/icons/app-store-s/app-store-s-256x256_2x.png"
-              title="Apple Store "
-              title2="Connect"
-            />
-          </div>
-        </div>
-      </section>
-  )
-}
-
-export default SkillTechStack
+export default SkillTechStack;
