@@ -14,8 +14,8 @@ const socials = [
 const facts = [
   { value: "7", label: "Roles & internships" },
   { value: "10+", label: "Projects delivered" },
-  { value: "5", label: "Apps on the Play Store" },
-  { value: "8.9", label: "CGPA · B.Tech IT" },
+  { value: "5+", label: "Apps live in stores" },
+  { value: "2", label: "Countries · India & Thailand" },
 ];
 
 const Hero = () => {
@@ -25,7 +25,7 @@ const Hero = () => {
         <img
           src={HeroImage}
           alt="Pravesh Chaudhary"
-          className="h-36 w-36 shrink-0 rounded-full object-cover ring-1 ring-zinc-200 ring-offset-4 sm:h-52 sm:w-52 lg:h-60 lg:w-60"
+          className="h-36 w-36 shrink-0 rounded-full object-cover ring-1 ring-zinc-200 ring-offset-4 ring-offset-white sm:h-52 sm:w-52 lg:h-60 lg:w-60"
         />
 
         <div>
@@ -51,9 +51,17 @@ const Hero = () => {
           </p>
 
           <p className="mx-auto mt-5 max-w-xl leading-7 text-zinc-600 sm:mx-0">
-            I build mobile and web applications from scratch to production,
-            mostly with Flutter and Android, with React and Node.js on the web
-            side. Several of my apps are live on the Play Store and App Store.
+            I build and ship production-grade mobile apps with{" "}
+            <span className="font-medium text-zinc-900">Flutter, Android & iOS</span>
+            , backed by scalable services on Node.js, Firebase and AWS, from
+            first design to store release.
+          </p>
+
+          <p className="mt-4 inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm sm:justify-start">
+            <span className="text-zinc-400">Currently</span>
+            <span className="font-medium text-zinc-900">
+              Software Developer @ Intela Solution
+            </span>
           </p>
 
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3 sm:justify-start">

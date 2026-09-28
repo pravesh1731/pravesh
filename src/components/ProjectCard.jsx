@@ -1,157 +1,97 @@
-import { Check } from "lucide-react";
-import { IconBadge, TechPill } from "../Common/Common";
-import ResourceLinks from "./ResourceLinks";
+import { ArrowRight, Check, Download, Globe, LayoutDashboard, Lock } from "lucide-react";
+import { FaGithub, FaGooglePlay } from "react-icons/fa";
+import { TechPill } from "../Common/Common";
+import { projectPath } from "../data/projects";
+import ProjectCover from "./ProjectCover";
 
-const ProjectLinks = ({ links = [] }) => {
-  if (links.length === 0) return null;
+const linkIcons = { website: Globe, play: FaGooglePlay, apk: Download, admin: LayoutDashboard };
 
-  return (
-    <div className="mt-auto pt-6">
-      <div className="border-t border-zinc-100 pt-4">
-        <ResourceLinks links={links} />
-      </div>
-    </div>
-  );
-};
+const pillClass =
+  "inline-flex items-center gap-1.5 rounded-full border border-zinc-300 px-2.5 py-1.5 text-xs font-medium transition-colors duration-200 hover:border-zinc-900 hover:bg-zinc-900 hover:text-white";
 
-const Tag = ({ children, dark = false }) => (
-  <span
-    className={`rounded-full px-2.5 py-1 text-xs font-medium ${
-      dark ? "bg-zinc-900 text-white" : "border border-zinc-200 text-zinc-600"
-    }`}
-  >
-    {children}
-  </span>
+// Live links, then GitHub (or a "Private code" note for client work).
+export const ProjectLinks = ({ live, github }) => (
+  <>
+    {live.map(({ kind, label, href }) => {
+      const Icon = linkIcons[kind] || Globe;
+      return (
+        <a key={label} href={href} target="_blank" rel="noopener noreferrer" className={pillClass}>
+          <Icon className="h-3.5 w-3.5" />
+          {label}
+        </a>
+      );
+    })}
+    {github ? (
+      <a href={github} target="_blank" rel="noopener noreferrer" className={pillClass}>
+        <FaGithub className="h-3.5 w-3.5" />
+        GitHub
+      </a>
+    ) : (
+      <span
+        title="Client project, source code is private"
+        className="inline-flex items-center gap-1.5 px-1 py-1.5 text-xs text-zinc-400"
+      >
+        <Lock className="h-3.5 w-3.5" />
+        Private
+      </span>
+    )}
+  </>
 );
 
-const Screenshot = ({ image, title }) =>
-  image ? (
-    <img
-      src={image}
-      alt={`${title} screenshot`}
-      loading="lazy"
-      className="mb-6 aspect-video w-full rounded-xl border border-zinc-200 object-cover"
-    />
-  ) : null;
+const ProjectCard = ({ project, number }) => {
+  const { slug, category, title, tag, summary, highlights, techStack, live, github } = project;
 
-export const FeaturedProject = ({
-  number,
-  image,
-  title,
-  subtitle,
-  tag,
-  description,
-  deliverables,
-  features,
-  techStack,
-  links,
-}) => {
   return (
-    <article className="grid overflow-hidden rounded-3xl border border-zinc-200 transition-colors duration-300 hover:border-zinc-400 md:grid-cols-[1.1fr_1fr]">
-      <div className="flex flex-col p-6 sm:p-8">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="mr-1 font-mono text-xs text-zinc-400">{number}</span>
-          <Tag dark>Featured</Tag>
-          {tag && <Tag>{tag}</Tag>}
+    <article className="group flex h-full flex-col rounded-3xl border border-zinc-200 bg-white p-3 transition duration-300 hover:border-zinc-400 hover:shadow-[0_16px_40px_-20px_rgba(0,0,0,0.25)]">
+      <a href={projectPath(slug)} aria-label={`${title} details`} tabIndex={-1}>
+        <ProjectCover project={project} number={number} />
+      </a>
+
+      <div className="flex flex-1 flex-col px-2 pt-4 pb-2 sm:px-3">
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-xs font-medium tracking-widest text-zinc-500 uppercase">{category}</p>
+          {tag && (
+            <span className="shrink-0 rounded-full border border-zinc-200 px-2 py-0.5 text-[11px] text-zinc-500">
+              {tag}
+            </span>
+          )}
         </div>
 
-        <h3 className="mt-5 text-2xl font-semibold tracking-tight sm:text-3xl">
-          {title}
+        <h3 className="mt-1.5 text-xl font-semibold tracking-tight">
+          <a href={projectPath(slug)} className="hover:underline hover:decoration-zinc-300 hover:underline-offset-4">
+            {title}
+          </a>
         </h3>
-        <p className="mt-1 text-zinc-500">{subtitle}</p>
-        <p className="mt-4 text-[15px] leading-7 text-zinc-600">{description}</p>
+        <p className="mt-1.5 line-clamp-2 text-sm leading-6 text-zinc-600">{summary}</p>
 
-        <div className="mt-6 flex flex-wrap gap-2">
+        <ul className="mt-4 grid gap-x-4 gap-y-1.5 text-sm text-zinc-700 sm:grid-cols-2">
+          {highlights.map((point) => (
+            <li key={point} className="flex items-start gap-2">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-zinc-900" />
+              {point}
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-4 flex flex-wrap gap-1.5">
           {techStack.map((name) => (
             <TechPill key={name} name={name} small />
           ))}
         </div>
 
-        <ProjectLinks links={links} />
-      </div>
-
-      <div className="border-t border-zinc-200 bg-zinc-50 p-6 sm:p-8 md:border-t-0 md:border-l">
-        <Screenshot image={image} title={title} />
-
-        <p className="text-xs font-medium tracking-widest text-zinc-500 uppercase">
-          What I shipped
-        </p>
-        <ul className="mt-4 grid gap-2.5">
-          {deliverables.map(({ icon, label, detail }) => (
-            <li
-              key={label}
-              className="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white p-3"
+        <div className="mt-auto pt-5">
+          <div className="flex flex-wrap items-center gap-1.5 border-t border-zinc-100 pt-4">
+            <ProjectLinks live={live} github={github} />
+            <a
+              href={projectPath(slug)}
+              className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-zinc-900 px-3 py-1.5 text-xs font-medium text-white transition-colors duration-200 hover:bg-zinc-700"
             >
-              <IconBadge icon={icon} />
-              <div>
-                <p className="text-sm font-medium">{label}</p>
-                <p className="text-xs text-zinc-500">{detail}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-
-        <p className="mt-7 text-xs font-medium tracking-widest text-zinc-500 uppercase">
-          Features
-        </p>
-        <ul className="mt-3 grid gap-x-4 sm:grid-cols-2 gap-y-2 text-sm text-zinc-700">
-          {features.map((feature) => (
-            <li key={feature} className="flex items-start gap-2">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-zinc-900" />
-              {feature}
-            </li>
-          ))}
-        </ul>
+              Details
+              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+            </a>
+          </div>
+        </div>
       </div>
-    </article>
-  );
-};
-
-const ProjectCard = ({
-  number,
-  image,
-  title,
-  subtitle,
-  tag,
-  description,
-  features,
-  techStack,
-  links,
-  className = "",
-}) => {
-  return (
-    <article
-      className={`flex h-full flex-col rounded-3xl border border-zinc-200 bg-white p-6 transition duration-300 hover:border-zinc-400 hover:shadow-[0_16px_40px_-20px_rgba(0,0,0,0.25)] ${className}`}
-    >
-      <Screenshot image={image} title={title} />
-
-      <div className="flex items-center justify-between gap-3">
-        <span className="font-mono text-xs text-zinc-400">{number}</span>
-        {tag && <Tag>{tag}</Tag>}
-      </div>
-
-      <h3 className="mt-4 text-xl font-semibold tracking-tight">{title}</h3>
-      <p className="text-sm text-zinc-500">{subtitle}</p>
-      <p className="mt-3 text-sm leading-6 text-zinc-600">{description}</p>
-
-      {features?.length > 0 && (
-        <ul className="mt-4 space-y-1.5 text-sm text-zinc-700">
-          {features.map((feature) => (
-            <li key={feature} className="flex items-start gap-2">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-zinc-900" />
-              {feature}
-            </li>
-          ))}
-        </ul>
-      )}
-
-      <div className="mt-5 flex flex-wrap gap-1.5">
-        {techStack.map((name) => (
-          <TechPill key={name} name={name} small />
-        ))}
-      </div>
-
-      <ProjectLinks links={links} />
     </article>
   );
 };

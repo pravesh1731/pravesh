@@ -1,5 +1,26 @@
 @import "tailwindcss";
 
+/* Theme is toggled by a `dark` class on <html> (see components/ThemeToggle.jsx). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* The site is built from white + the zinc scale, so dark mode just remaps
+   those colors: light surfaces become dark and dark accents become light. */
+.dark {
+  color-scheme: dark;
+  --color-white: #0b0b0d;
+  --color-zinc-50: #121215;
+  --color-zinc-100: #1a1a1e;
+  --color-zinc-200: #27272b;
+  --color-zinc-300: #3a3a40;
+  --color-zinc-400: #6b6b74;
+  --color-zinc-500: #8e8e97;
+  --color-zinc-600: #a8a8b0;
+  --color-zinc-700: #d0d0d6;
+  --color-zinc-800: #e4e4e7;
+  --color-zinc-900: #f4f4f5;
+  --color-zinc-950: #fafafa;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
@@ -7,6 +28,25 @@ html {
 
 body {
   @apply bg-white text-zinc-900 antialiased;
+}
+
+@theme {
+  --animate-fade-in: fade-in 0.35s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+  }
+}
+
+/* Horizontal chip rows on mobile scroll without a visible bar. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Scroll fade-in, see components/Reveal.jsx */

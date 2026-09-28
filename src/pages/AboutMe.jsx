@@ -1,4 +1,10 @@
-import { BriefcaseBusiness, GraduationCap } from "lucide-react";
+import {
+  BriefcaseBusiness,
+  Layers,
+  Rocket,
+  ShieldCheck,
+  Users,
+} from "lucide-react";
 import ExperienceItem from "../components/ExperienceItem";
 import { Card, Heading, IconBadge } from "../Common/Common";
 
@@ -29,6 +35,30 @@ const roles = [
   },
 ];
 
+// What an interviewer should take away, each backed by the experience below.
+const strengths = [
+  {
+    icon: Rocket,
+    title: "Idea to store release",
+    detail: "Shipped apps to the Play Store and App Store, TestFlight included.",
+  },
+  {
+    icon: Layers,
+    title: "Full-stack when needed",
+    detail: "Flutter apps with Node.js, Firebase and AWS backends, plus React admin panels.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Production-minded",
+    detail: "Payments, Firebase security rules, crash and load-time fixes.",
+  },
+  {
+    icon: Users,
+    title: "Works with real clients",
+    detail: "Delivered for teams in India and Thailand alongside design and backend.",
+  },
+];
+
 const AboutMe = () => {
   return (
     <section id="about">
@@ -41,45 +71,33 @@ const AboutMe = () => {
             matter.
           </p>
           <p>
-            I’m an IT student and software developer who builds{" "}
+            I’ve worked across{" "}
             <span className="font-medium text-zinc-900">
-              mobile, web, and full-stack applications
+              7 roles and internships
             </span>
-            . I mostly work with Flutter and Android, and I’m also using
-            React, Node.js, Firebase, and AWS more and more.
+            , building mobile, web and full-stack products for travel,
+            education and e-commerce, with apps now live in the stores.
           </p>
           <p>
-            I’ve worked on everything from educational and travel platforms
-            to e-commerce apps, taking ideas all the way to production. I like
-            hard problems, trying out new tools, and getting a little better
-            at the craft with every project.
+            I like hard problems, clean code, and getting a little better at
+            the craft with every release.
           </p>
-          <p className="border-l-2 border-zinc-900 pl-4 font-medium text-zinc-900">
-            I don’t just want to build software. I want to build experiences
-            people remember.
-          </p>
+
+          <ul className="grid gap-3 pt-2 sm:grid-cols-2">
+            {strengths.map(({ icon, title, detail }) => (
+              <li
+                key={title}
+                className="rounded-2xl border border-zinc-200 p-4 transition-colors duration-200 hover:border-zinc-400"
+              >
+                <IconBadge icon={icon} />
+                <p className="mt-3 text-sm font-semibold text-zinc-900">{title}</p>
+                <p className="mt-1 text-sm leading-6 text-zinc-500">{detail}</p>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="space-y-4">
-          <Card className="p-5">
-            <div className="flex items-center gap-3">
-              <IconBadge icon={GraduationCap} />
-              <p className="text-xs font-medium tracking-widest text-zinc-500 uppercase">
-                Education
-              </p>
-            </div>
-            <p className="mt-4 font-semibold">B.Tech, Information Technology</p>
-            <p className="text-sm text-zinc-600">
-              Guru Ghasidas Vishwavidyalaya, Bilaspur
-            </p>
-            <div className="mt-3 flex items-center justify-between text-xs">
-              <span className="text-zinc-400">2023 — Present</span>
-              <span className="rounded-full bg-zinc-900 px-2.5 py-1 font-medium text-white">
-                CGPA 8.9
-              </span>
-            </div>
-          </Card>
-
           <Card className="p-5">
             <div className="flex items-center gap-3">
               <IconBadge icon={BriefcaseBusiness} />

@@ -9,6 +9,14 @@
       content="Pravesh Chaudhary — software developer building mobile and web apps with Flutter, Android, React and Node.js."
     />
     <meta name="theme-color" content="#ffffff" />
+    <script>
+      // Apply the saved (or system) theme before first paint to avoid a flash.
+      try {
+        const saved = localStorage.getItem("theme");
+        const dark = saved ? saved === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+        if (dark) document.documentElement.classList.add("dark");
+      } catch (e) {}
+    </script>
     <title>Pravesh Chaudhary · Software Developer</title>
   </head>
   <body>

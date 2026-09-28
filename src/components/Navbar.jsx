@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { RESUME_URL } from "../data/links";
+import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { label: "About", href: "#about" },
@@ -42,7 +43,7 @@ const Navbar = () => {
     <header className="fixed inset-x-0 top-3 z-50 px-4 sm:top-4">
       <nav
         className={`relative mx-auto flex max-w-5xl items-center justify-between rounded-full border border-zinc-200/80 bg-white/80 py-1.5 pr-1.5 pl-2 backdrop-blur-md transition-shadow duration-300 ${
-          scrolled ? "shadow-[0_8px_30px_-12px_rgba(0,0,0,0.2)]" : ""
+          scrolled ? "shadow-[0_8px_30px_-12px_rgba(0,0,0,0.2)] dark:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.8)]" : ""
         }`}
       >
         <a href="#top" className="flex items-center gap-2.5 rounded-full pr-2">
@@ -73,6 +74,7 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
+          <ThemeToggle />
           <a
             href={RESUME_URL}
             target="_blank"
@@ -83,15 +85,18 @@ const Navbar = () => {
           </a>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-          aria-expanded={open}
-          className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-zinc-100 md:hidden"
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-zinc-100"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
 
         {open && (
           <div className="absolute inset-x-0 top-full mt-2 rounded-2xl border border-zinc-200 bg-white p-2 shadow-[0_16px_40px_-16px_rgba(0,0,0,0.25)] md:hidden">

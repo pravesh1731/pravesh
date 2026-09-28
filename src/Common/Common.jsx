@@ -34,7 +34,7 @@ export const IconBadge = ({ icon: Icon }) => {
 // no logo or the image fails to load.
 export const TechLogo = ({ name, className = "h-4 w-4" }) => {
   const [failed, setFailed] = useState(false);
-  const { icon, Icon } = tech[name] || {};
+  const { icon, Icon, mono } = tech[name] || {};
 
   if (Icon) return <Icon className={`${className} shrink-0 text-zinc-800`} />;
   if (!icon || failed) return null;
@@ -45,7 +45,9 @@ export const TechLogo = ({ name, className = "h-4 w-4" }) => {
       alt=""
       loading="lazy"
       onError={() => setFailed(true)}
-      className={`${className} shrink-0 object-contain`}
+      className={`${className} shrink-0 object-contain ${
+        mono ? "dark:invert dark:hue-rotate-180" : ""
+      }`}
     />
   );
 };
