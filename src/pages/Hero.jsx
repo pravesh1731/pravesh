@@ -13,8 +13,8 @@ const socials = [
 
 const facts = [
   { value: "7", label: "Roles & internships" },
-  { value: "10+", label: "Projects delivered" },
-  { value: "5+", label: "Apps live in stores" },
+  { value: "25+", label: "Projects Worked" },
+  { value: "10+", label: "Apps live in stores" },
   { value: "2", label: "Countries · India & Thailand" },
 ];
 
@@ -44,7 +44,8 @@ const Hero = () => {
           </div>
 
           <h1 className="mt-5 text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
-            Pravesh Chaudhary
+            <span className="water-float">Pravesh</span>{" "}
+            <span className="water-float [animation-delay:-2.2s]">Chaudhary</span>
           </h1>
           <p className="mt-2 text-xl text-zinc-500 sm:text-2xl">
             Software Developer · Mobile & Web
@@ -60,7 +61,7 @@ const Hero = () => {
           <p className="mt-4 inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm sm:justify-start">
             <span className="text-zinc-400">Currently</span>
             <span className="font-medium text-zinc-900">
-              Software Developer @ Intela Solution
+              Software Developer @ Thaiseva
             </span>
           </p>
 

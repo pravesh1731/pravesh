@@ -11,7 +11,7 @@ const experiences = [
   {
     period: "Oct 2025 — Present",
     role: "Software Developer",
-    company: "Intela Solution",
+    company: "Thaiseva",
     location: "Thailand",
     type: "Professional",
     highlights: [
@@ -21,7 +21,7 @@ const experiences = [
     ],
     stack: ["Flutter", "Dart", "Firebase", "iOS", "TestFlight"],
     links: [
-      { kind: "doc", label: "Offer letter", href: drive("131qLVmgtAq1w86RnQe9-HG5hL0fOqHpo") },
+      { kind: "admin", label: "Admin portal", href: "https://gothai-admin.web.app/login" },
     ],
   },
   {
@@ -44,7 +44,7 @@ const experiences = [
   {
     period: "Feb 2026",
     role: "Contract Developer",
-    company: "Thaiseva",
+    company: "Intela Solution",
     location: "Thailand",
     type: "Contract",
     highlights: [
@@ -53,7 +53,6 @@ const experiences = [
     ],
     stack: ["Flutter", "Riverpod", "Firebase", "Payments"],
     links: [
-      { kind: "admin", label: "Admin portal", href: "https://gothai-admin.web.app/login" },
       { kind: "doc", label: "Signed MOU", href: drive("1fQei1W3ftVZMbE2T4kojCpOKVq5uVLkt") },
     ],
   },
@@ -89,7 +88,9 @@ const experiences = [
       { kind: "play", label: "Gotan Store", href: playStore("com.digistall.gotan") },
       { kind: "play", label: "Digistall", href: playStore("com.digistall.digistall") },
       { kind: "play", label: "DigiRider", href: playStore("com.digistall.rider") },
+      { kind: "website", label: "digistall.in", href: "https://www.digistall.in/" },
       { kind: "website", label: "gotan.in", href: "https://gotan.in/" },
+      { kind: "website", label: "rider.digistall.in", href: "https://rider.digistall.in/" },
       { kind: "doc", label: "Offer letter", href: drive("1mzu3dITq8lHyqS5w3Kqjhh4s-uQOiuEI") },
       { kind: "doc", label: "Completion certificate", href: drive("1k3tnXYexp3Dm_VK_AwanO2Ynt6ZCYf2q") },
     ],

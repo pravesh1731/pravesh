@@ -4,16 +4,27 @@ import { tech } from "../data/tech";
 // Project thumbnail: the website screenshot when there is one, otherwise a
 // dotted panel with the main tech logos. App screens live on the details page.
 const ProjectCover = ({ project, number, className = "aspect-[2/1]" }) => {
-  const { image, title, platforms, techStack } = project;
+  const { image, imageFit, title, platforms, techStack } = project;
 
   if (image) {
+    const isContain = imageFit === "contain";
     return (
-      <div className={`relative overflow-hidden rounded-2xl ${className} border border-zinc-200 bg-zinc-100`}>
+      <div
+        className={`relative overflow-hidden rounded-2xl ${className} border border-zinc-200 ${
+          isContain
+            ? "flex items-center justify-center bg-zinc-50 bg-[radial-gradient(var(--color-zinc-200)_1px,transparent_1px)] bg-size-[16px_16px] p-5"
+            : "bg-zinc-100"
+        }`}
+      >
         <img
           src={image}
-          alt={`${title} website`}
+          alt={`${title} cover`}
           loading="lazy"
-          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+          className={
+            isContain
+              ? "h-full max-h-36 w-auto object-contain rounded-2xl shadow-sm transition-transform duration-500 group-hover:scale-105"
+              : "h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+          }
         />
       </div>
     );

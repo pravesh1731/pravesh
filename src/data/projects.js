@@ -9,9 +9,13 @@ import presentMeApp2 from "../assets/projects/presentme-app-2.webp";
 import presentMeApp3 from "../assets/projects/presentme-app-3.webp";
 import presentMeApp4 from "../assets/projects/presentme-app-4.webp";
 import jasaenWeb from "../assets/projects/jasaen-web.webp";
+import digistallWeb from "../assets/projects/digistall-web.png";
+import woozieeWeb from "../assets/projects/wooziee-web.png";
+import vakyWeb from "../assets/projects/vaky-web.png";
+import agridirectImg from "../assets/projects/agridirect.png";
 
-// Details page URL (hash route, see App.jsx).
-export const projectPath = (slug) => `#/projects/${slug}`;
+// Details page URL (HTML5 route, see App.jsx).
+export const projectPath = (slug) => `/projects/${slug}`;
 
 const playStore = (id) => `https://play.google.com/store/apps/details?id=${id}`;
 
@@ -28,7 +32,6 @@ export const projects = [
     slug: "thaiseva",
     category: "Travel · Mobile & Web",
     title: "Thaiseva",
-    tag: "Client project",
     summary:
       "All-in-one travel platform for Thailand: tours, hotels, taxis and food, run from partner and admin panels.",
     highlights: [
@@ -128,6 +131,142 @@ export const projects = [
     ],
   },
   {
+    slug: "digistall",
+    category: "Retail & Logistics · Mobile & Web",
+    title: "Gotan Store & Digistall",
+    tag: "Client project",
+    summary:
+      "Rural retail and delivery network comprising three Flutter apps and a central web store for fast order fulfillment.",
+    highlights: [
+      "3 interconnected Flutter apps",
+      "Rider dispatch & delivery tracking",
+      "Merchant inventory panel",
+      "Live on Play Store & web",
+    ],
+    techStack: ["Flutter", "Dart", "Firebase", "REST API", "Git"],
+    live: [
+      { kind: "website", label: "digistall.in", href: "https://www.digistall.in/" },
+      { kind: "website", label: "gotan.in", href: "https://gotan.in/" },
+      { kind: "website", label: "rider.digistall.in", href: "https://rider.digistall.in/" },
+      { kind: "play", label: "Gotan Store", href: playStore("com.digistall.gotan") },
+      { kind: "play", label: "Digistall", href: playStore("com.digistall.digistall") },
+      { kind: "play", label: "DigiRider", href: playStore("com.digistall.rider") },
+    ],
+    github: null,
+    links: [],
+    image: digistallWeb,
+    screens: [],
+    overview: [
+      "Gotan Store & Digistall form a complete hyperlocal commerce ecosystem empowering rural shop owners, delivery riders, and customers.",
+      "The platform includes three distinct production Flutter applications: Gotan Store for buyers, Digistall for local merchants to manage inventory, and DigiRider for delivery dispatch and GPS tracking.",
+    ],
+    platforms: ["Gotan Store (Play Store)", "Digistall Merchant App", "DigiRider Delivery App", "gotan.in website"],
+    features: [
+      "Multi-store product ordering",
+      "Merchant order management & pricing",
+      "Live delivery rider dispatch & routing",
+      "SMS & notification alerts",
+      "Cloud backend with Firebase synchronization",
+    ],
+    architecture: [
+      { layer: "Apps", items: ["Gotan Store (Flutter)", "Digistall Merchant", "DigiRider Delivery"] },
+      { layer: "Web", items: ["gotan.in public portal"] },
+      { layer: "Backend", items: ["Firebase Auth & Database", "REST APIs"] },
+    ],
+    stackDetails: [
+      { name: "Flutter", use: "Mobile client application framework" },
+      { name: "Dart", use: "App programming language" },
+      { name: "Firebase", use: "Realtime data sync & notifications" },
+      { name: "REST API", use: "Order & catalog management services" },
+    ],
+  },
+  {
+    slug: "wooziee",
+    category: "E-Commerce · Mobile",
+    title: "Wooziee",
+    tag: "Client project",
+    summary:
+      "Modern e-commerce mobile app built with Flutter and REST APIs, offering seamless product browsing, cart, and checkout.",
+    highlights: [
+      "Dynamic product catalog & filters",
+      "Fast cart & checkout workflow",
+      "REST API integration",
+      "Live on Google Play Store",
+    ],
+    techStack: ["Flutter", "Dart", "REST API", "Android", "Git"],
+    live: [{ kind: "play", label: "Play Store", href: playStore("com.wooziee.androidapp") }],
+    github: null,
+    links: [],
+    image: woozieeWeb,
+    screens: [],
+    overview: [
+      "Wooziee is a consumer-facing e-commerce mobile application built for Android. It enables shoppers to explore collections, filter items by category, manage a real-time cart, and complete orders with smooth checkout flows.",
+      "Developed using Flutter and Dart, the application communicates with high-throughput REST APIs, maintaining quick response times and responsive layouts across diverse screen sizes.",
+    ],
+    platforms: ["Flutter app for Android"],
+    features: [
+      "Product catalog with search and filters",
+      "Cart management & checkout",
+      "User authentication and profiles",
+      "Order tracking",
+      "Push notifications",
+    ],
+    architecture: [
+      { layer: "Client", items: ["Flutter (Android)", "State management", "Responsive UI"] },
+      { layer: "API", items: ["REST API integration", "JSON serialization"] },
+      { layer: "Distribution", items: ["Google Play Store release"] },
+    ],
+    stackDetails: [
+      { name: "Flutter", use: "Cross-platform mobile UI" },
+      { name: "Dart", use: "Application language" },
+      { name: "REST API", use: "Data exchange with backend servers" },
+      { name: "Git", use: "Version control and team collaboration" },
+    ],
+  },
+  
+  {
+    slug: "vaky",
+    category: "FinTech & Utility · Mobile",
+    title: "Vaky",
+    tag: "Client project",
+    summary:
+      "All-in-one utility and services mobile application with secure payment gateway integration and native platform channels.",
+    highlights: [
+      "Secure payment gateway integration",
+      "Native Android & iOS optimization",
+      "High-speed transaction processing",
+      "Live on Google Play Store",
+    ],
+    techStack: ["Flutter", "Dart", "Android", "iOS", "Payments"],
+    live: [{ kind: "play", label: "Play Store", href: playStore("com.vaky.aio") }],
+    github: null,
+    links: [],
+    image: vakyWeb,
+    screens: [],
+    overview: [
+      "Vaky is an all-in-one consumer application providing everyday digital services, utility bill settlements, and transactions.",
+      "Engineered with Flutter alongside custom native Android and iOS modules, it delivers bank-grade security, frictionless payment checkout, and optimized startup latency.",
+    ],
+    platforms: ["Flutter app for Android & iOS"],
+    features: [
+      "Multi-service payments and transactions",
+      "Integrated secure payment SDKs",
+      "Native platform bridging for performance",
+      "Transaction history & downloadable invoices",
+    ],
+    architecture: [
+      { layer: "Client", items: ["Flutter application", "Native Android & iOS plugins"] },
+      { layer: "Security", items: ["Encrypted transaction payloads", "Tokenized auth"] },
+      { layer: "Payments", items: ["Payment gateway gateway APIs"] },
+    ],
+    stackDetails: [
+      { name: "Flutter", use: "Cross-platform mobile UI" },
+      { name: "Dart", use: "App codebase" },
+      { name: "Android", use: "Native Kotlin platform channels" },
+      { name: "iOS", use: "Native Swift modules" },
+    ],
+  },
+  {
     slug: "jasaen",
     category: "Hospitality · Web",
     title: "Jasaen",
@@ -193,6 +332,8 @@ export const projects = [
     ],
     github: "https://github.com/pravesh1731/agriDirect",
     links: [],
+    image: agridirectImg,
+    imageFit: "contain",
     screens: [],
 
     overview: [

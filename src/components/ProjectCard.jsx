@@ -41,8 +41,17 @@ export const ProjectLinks = ({ live, github }) => (
 const ProjectCard = ({ project, number }) => {
   const { slug, category, title, tag, summary, highlights, techStack, live, github } = project;
 
+  const handleCardClick = (e) => {
+    if (e.target.closest("a, button")) return;
+    window.history.pushState(null, "", projectPath(slug));
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  };
+
   return (
-    <article className="group flex h-full flex-col rounded-3xl border border-zinc-200 bg-white p-3 transition duration-300 hover:border-zinc-400 hover:shadow-[0_16px_40px_-20px_rgba(0,0,0,0.25)]">
+    <article
+      onClick={handleCardClick}
+      className="group flex h-full cursor-pointer flex-col rounded-3xl border border-zinc-200 bg-white p-3 transition duration-300 hover:border-zinc-400 hover:shadow-[0_16px_40px_-20px_rgba(0,0,0,0.25)]"
+    >
       <a href={projectPath(slug)} aria-label={`${title} details`} tabIndex={-1}>
         <ProjectCover project={project} number={number} />
       </a>
