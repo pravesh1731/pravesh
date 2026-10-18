@@ -29,24 +29,28 @@ const socials = [
 // - "/projects/<slug>" shows a project's details page
 // - "/projects" shows the dedicated all projects archive
 // - "/" shows the home page (with smooth section anchors that never put # in the URL)
+const getInitialPathname = () => {
+  if (typeof window === "undefined") return "/";
+  if (window.location.hash.startsWith("#/")) {
+    const cleanPath = window.location.hash.slice(1);
+    window.history.replaceState(null, "", cleanPath);
+    return cleanPath;
+  }
+  return window.location.pathname;
+};
+
 const useLocation = () => {
-  const [pathname, setPathname] = useState(() => window.location.pathname);
+  const [pathname, setPathname] = useState(getInitialPathname);
 
   useEffect(() => {
-    // If user loaded with any # in the URL, clean it up immediately
-    if (window.location.hash) {
-      const rawHash = window.location.hash;
-      if (rawHash.startsWith("#/")) {
-        const cleanPath = rawHash.slice(1);
-        window.history.replaceState(null, "", cleanPath);
-      } else {
-        const id = rawHash.slice(1);
-        window.history.replaceState(null, "", window.location.pathname);
-        if (id && id !== "top") {
-          setTimeout(() => {
-            document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-          }, 60);
-        }
+    // If user loaded with a section anchor hash, scroll to it and clean hash from address bar
+    if (window.location.hash && !window.location.hash.startsWith("#/")) {
+      const id = window.location.hash.slice(1);
+      window.history.replaceState(null, "", window.location.pathname);
+      if (id && id !== "top") {
+        setTimeout(() => {
+          document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+        }, 60);
       }
     }
 
